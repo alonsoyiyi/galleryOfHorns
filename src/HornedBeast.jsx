@@ -12,18 +12,16 @@ function HornedBeast(props) {
 
     return (
         <>
-     
-
-            <Card style={{ width: '18rem' }}>
+            <Card onClick={()=>{props.mostrarModal(props.title);}} style={{ width: '18rem' }} >
                 <Card.Img variant="top" src={props.imageUrl} alt={props.title} />
                 <Card.Body>
                     <Card.Title>{props.title}</Card.Title>
                     <Card.Text>
-                        <p>Descripción : {props.description}</p>
-                        <p>Número de cuernos: {props.horns}</p>
-                        <p>Palabra clave : {props.keyword}</p>
+                        Descripción : {props.description}
+                        Número de cuernos: {props.horns}
+                        Palabra clave : {props.keyword}
                     </Card.Text>
-                    <Button onClick={addCounter} variant="primary">Me gusta : {clicks}</Button>
+                    <Button onClick={(e)=>{e.stopPropagation(); addCounter();}} variant="primary">Me gusta : {clicks}</Button>
                 </Card.Body>
             </Card>
         </>
