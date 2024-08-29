@@ -10,11 +10,19 @@ import Footer from './Footer';
 
 function App() {
 
-  const [displayModal, setDisplayModal] = useState(false);
-  const [selectedBeast, setSelectedBeast] = useState({});
   const [filterName, setFilterName] = useState("");
   const [filterHorns, setFilterHorns] = useState(null);
+  const [displayModal, setDisplayModal] = useState(false);
+  const [selectedBeast, setSelectedBeast] = useState({});
 
+  function mostrarModal(name) {
+    const beastWithName = lab02.find(beast => beast.title === name);
+    setSelectedBeast(beastWithName);
+    setDisplayModal(true);
+  }
+  function handleClose() {
+    setDisplayModal(false);
+  }
   function filtrarName(beasts) {
     return beasts.filter(beast => beast.title.toLowerCase().includes(filterName.toLowerCase()));
   }
@@ -26,24 +34,23 @@ function App() {
     return beasts.filter(beast => beast.horns === filterHorns);
   }
 
-
-
-
-  
-  function mostrarModal(name) {
-    const beastWithName = lab02.find(beast => beast.title === name);
-    setSelectedBeast(beastWithName);
-    setDisplayModal(true);2
-  }
-  function handleClose() {
-    setDisplayModal(false);
-  }
+const filteredBeast = filtrarHorns(filtrarName(lab02));
 
   return (
     <>
       <div>
         <Header />
-        <Gallery mostrarModal={mostrarModal} allbeast={lab02} />
+        <div style = {{ marginBottom: '20px', padding: '10px'}}> 
+          <input type="text" placeholder="Buscar nombre de Bestias" value={filterName} onChange={(e) => setFilterName(e.target.value)} />
+          <select value={filterHorns || ""} onChange={(e) => setFilterHorns(e.target.value ? parseInt(e.target.value) : null)}>
+          <option value="">Todos los cuernitos</option>
+          <option value="1">1 Cuernito</option>
+          <option value="2">2 Cuernitos</option>
+          <option value="3">3 Cuernitos</option>
+          <option value="4">4 Cuernitos</option>
+          </select>
+        </div>
+        <Gallery mostrarModal={mostrarModal} allbeast={filteredBeast} />
         <SelectBeast selectedBeast={selectedBeast} show={displayModal} handleClose={handleClose} />
         <Footer />
       </div>
