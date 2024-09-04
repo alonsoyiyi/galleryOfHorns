@@ -40,9 +40,9 @@ const filteredBeast = filtrarHorns(filtrarName(lab02));
     <>
       <div>
         <Header />
-        <div style = {{ marginBottom: '20px', padding: '10px'}}> 
-          <input type="text" placeholder="Buscar nombre de Bestias" value={filterName} onChange={(e) => setFilterName(e.target.value)} />
-          <select value={filterHorns || ""} onChange={(e) => setFilterHorns(e.target.value ? parseInt(e.target.value) : null)}>
+        <div className="input-container" > 
+          <input className="beast-input" type="text" placeholder="Buscar nombre de Bestias" value={filterName} onChange={(e) => setFilterName(e.target.value)} />
+          <select className="beast-select" value={filterHorns || ""} onChange={(e) => setFilterHorns(e.target.value ? parseInt(e.target.value) : null)}>
           <option value="">Todos los cuernitos</option>
           <option value="1">1 Cuernito</option>
           <option value="2">2 Cuernitos</option>
